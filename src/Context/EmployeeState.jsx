@@ -1,0 +1,76 @@
+import { createContext } from "react";
+import toast from "react-hot-toast";
+
+export const employeeContext = createContext();
+
+const EmployeeState = (props) => {
+
+  // 1. login the employee and generate token ---------------
+  const loginEmployee = async (loginInfo) => {
+    let res = await fetch(`${import.meta.env.VITE_HOST}/api/employee/login`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+      },
+      body: JSON.stringify(loginInfo),
+    });
+
+    let result = await res.json();
+    if (result?.success) {
+      localStorage.setItem("jwtToken", result?.jwtToken);
+      window.open("/","_self")
+    } else {
+      toast.error("Some error occured in logging, Please Try Again!!!");
+      window.open("/login","_self")
+    }
+  };
+
+
+   // 2. bookmark the jb for later ---------------
+   const bookMarkJob = async (jobId) => {
+    let res = await fetch(`${import.meta.env.VITE_HOST}/api/employee/bookmarkJob`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+        "jwtToken":localStorage.getItem("jwtToken")
+      },
+      body: JSON.stringify({jobId}),
+    });
+
+    let result = await res.json();
+    
+    return result;
+  };
+
+  // 2. bookmark the jb for later ---------------
+  const applyForJob = async (jobId) => {
+    let res = await fetch(`${import.meta.env.VITE_HOST}/api/employee/applyForJob`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true,
+        "jwtToken":localStorage.getItem("jwtToken")
+      },
+      body: JSON.stringify({jobId}),
+    });
+
+    let result = await res.json();    
+    return result;
+  };
+
+
+
+
+  return (
+    <employeeContext.Provider value={{ loginEmployee,bookMarkJob,applyForJob }}>
+      {props.children}
+    </employeeContext.Provider>
+  );
+};
+
+export default EmployeeState;
