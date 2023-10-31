@@ -46,7 +46,7 @@ const EmployeeState = (props) => {
     return result;
   };
 
-  // 2. bookmark the jb for later ---------------
+  // 3. bookmark the jb for later ---------------
   const applyForJob = async (jobId) => {
     let res = await fetch(`${import.meta.env.VITE_HOST}/api/employee/applyForJob`, {
       method: "POST",
@@ -63,11 +63,30 @@ const EmployeeState = (props) => {
     return result;
   };
 
+   // 4. Update the about route ---------------
+   const updateAbout = async (data) => {
+    let result = await fetch(
+      `${import.meta.env.VITE_HOST}/api/employee/updateAbout`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          jwtToken: localStorage.getItem("jwtToken"),
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const json = await result.json();
+    return json;
+  };
 
 
 
   return (
-    <employeeContext.Provider value={{ loginEmployee,bookMarkJob,applyForJob }}>
+    <employeeContext.Provider value={{ loginEmployee,bookMarkJob,applyForJob,updateAbout }}>
       {props.children}
     </employeeContext.Provider>
   );

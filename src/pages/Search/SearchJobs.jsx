@@ -163,7 +163,7 @@ const SearchJobs = () => {
   let { data: aboutData } = useFetch(
     `${
       import.meta.env.VITE_HOST
-    }/api/jobs?position=${position}&location=${location}&noLogin=${
+    }/api/search/jobs?position=${position}&location=${location}&noLogin=${
       !localStorage.getItem("jwtToken") ? "true" : "false"
     }`,
     "get",{

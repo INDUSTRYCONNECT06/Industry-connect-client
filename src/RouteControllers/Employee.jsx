@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import About from "../pages/Employer/About";
-import PostJob from "../pages/Employer/PostJob";
-import Dashboard from "../pages/Employer/Dashboard";
+import About from "../pages/Employee/About";
 
-const Employer = () => {
+const Employee = () => {
   const navigate = useNavigate();
 
   //   blocking the passage
@@ -12,7 +10,7 @@ const Employer = () => {
     let process = () => {
       if (
         !localStorage.getItem("jwtToken") ||
-        localStorage.getItem("userType") !== "employer"
+        localStorage.getItem("userType") !== "employee"
       ) {
         navigate("/");
         return null;
@@ -26,10 +24,8 @@ const Employer = () => {
   return (
     <Routes>
       <Route path="about" element={<About />} />
-      <Route path="postjob" element={<PostJob />} />
-      <Route path="dashboard" element={<Dashboard />} />
     </Routes>
   );
 };
 
-export default Employer;
+export default Employee;

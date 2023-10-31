@@ -100,6 +100,13 @@ const Navbar = () => {
                 Edit Profile
               </span>
               </Link>
+
+              {localStorage.getItem("userType") === "employer" && <Link to="/employer/dashboard">
+              <span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
+                Dashboard
+              </span>
+              </Link>}
+
               {localStorage.getItem("userType") === "employer" && <Link to="/employer/postjob">
               <span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
                 Post a job

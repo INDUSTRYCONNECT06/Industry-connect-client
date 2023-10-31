@@ -14,6 +14,7 @@ import PreventNumberInputScrolling from "./helpers/preventDefaultScroliing";
 import { loginContext } from "./Context/LoginState";
 import { useContext, useEffect } from "react";
 import EmployeeState from "./Context/EmployeeState";
+import Employee from "./RouteControllers/Employee";
 
 export default function App() {
   const { checkAndVerifyLoginUser } = useContext(loginContext);
@@ -43,6 +44,7 @@ export default function App() {
               {/* Route Conrollers -------------- */}
               <Route path="/check" element={<Check />} />
               <Route path="/employer/*" element={<Employer />} />
+              <Route path="/employee/*" element={<Employee />} />
             </Routes>
 
             <Footer />

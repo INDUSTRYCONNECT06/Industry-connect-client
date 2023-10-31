@@ -27,13 +27,13 @@ const SearchBar = ({position,location}) => {
   const onSubmit = (e) => {
     e?.preventDefault();
 
-    if(localStorage.getItem("userType") === "employer"){
+    if(localStorage.getItem("userType") === "employer" || window.location.pathname === "/search/employees"){
       navigate(
         `/search/employees?position=${data?.position}&location=${data?.location}`
       ) 
     }
 
-    else if(localStorage.getItem("userType") === "employee"){
+    else if(localStorage.getItem("userType") === "employee" || window.location.pathname === "/search/jobs"){
       navigate(
         `/search/jobs?position=${data?.position}&location=${data?.location}`
       ) 

@@ -1,49 +1,45 @@
-import { AiOutlineClockCircle } from "react-icons/ai";
+
 import { BsBookmark } from "react-icons/bs";
 import { CiLocationOn } from "react-icons/ci";
-import { MdAttachMoney } from "react-icons/md";
-import { SlCalender } from "react-icons/sl";
+import { HiOutlineBookOpen } from "react-icons/hi2";
 import SearchBar from "../../components/SearchBar";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useFetch from "../../helpers/useFetch";
 
-const EmployeeCard = () => {
+const EmployeeCard = ({name,profile,location,educationDetails,experienceDetails,skills}) => {
   return (
     <div className="w-full bg-white box-border p-6 flex items-start gap-6 relative pb-20">
       <img
-        src={
-          "https://upload.wikimedia.org/wikipedia/commons/2/25/Chris_Evans_SDCC_2014.jpg"
-        }
+        src={profile}
         alt="employee"
         className="w-16 h-16 rounded-md"
       />
       <section className="flex flex-col gap-1">
-        <h5 className="text-md text-[#141414] font-normal">Linear company</h5>
+        <h5 className="text-md text-[#141414] font-normal">{name}</h5>
         <h3 className="text-xl text-[#141414] font-semibold ">
-          Software Engineer
+          {experienceDetails[0]?.jobRole}
         </h3>
 
         <div className="flex gap-12 text-[#141414b2] text-sm mt-1">
           <span className="flex items-center gap-1">
-            <CiLocationOn size={18} /> Brussels
+            <CiLocationOn size={18} /> {location}
           </span>
           <span className="flex items-center gap-1">
-            <AiOutlineClockCircle /> Full time
-          </span>
-          <span className="flex items-center gap-1">
-            <MdAttachMoney />
-            50-55k
-          </span>
-          <span className="flex items-center gap-1">
-            <SlCalender /> 29 min ago
+            <HiOutlineBookOpen /> {educationDetails?.degree}, {educationDetails?.field}
           </span>
         </div>
 
-        <p className="text-sm text-[#141414] font-normal mt-2">
-          Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt.
-          Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum
-          tempor Lorem incididunt.
-        </p>
+
+        <section className="flex items-center gap-4 mt-4">
+          {skills?.map((e,i)=>{
+            return <span key={i} className="bg-[#000aff8a] text-white px-3 py-1 rounded-md">
+              {e}
+            </span>
+          })}
+        </section>
+
+
       </section>
 
       <BsBookmark
@@ -54,7 +50,7 @@ const EmployeeCard = () => {
 
       <div className="absolute right-6 bottom-6">
         <button className="bg-main-blue-01 text-white px-14 py-2 hover:scale-105 transition-transform">
-          Call Now
+          Message
         </button>
       </div>
     </div>
@@ -63,6 +59,68 @@ const EmployeeCard = () => {
 
 const SearchEmployee = () => {
   const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const position = searchParams.get("position");
+  const location = searchParams.get("location");
+
+  const [filterData, setFilterData] = useState({
+    employment: null,
+    salary: null,
+    exp: null,
+  });
+
+  const [finalData, setFinalData] = useState();
+
+  let { data: aboutData } = useFetch(
+    `${
+      import.meta.env.VITE_HOST
+    }/api/search/employees?position=${position}&location=${location}&noLogin=${
+      !localStorage.getItem("jwtToken") ? "true" : "false"
+    }`,
+    "get",
+    {
+      headers: {
+        jwtToken: localStorage.getItem("jwtToken"),
+      },
+    }
+  );
+
+  const handleChange = (e) => {
+    setFilterData({ ...filterData, [e.target.name]: e.target.id });
+  };
+
+  // // handling the filter and again showing the data ---------------
+  // useEffect(() => {
+  //   const employmentFilter = (job) => {
+  //     if (filterData?.employment) {
+  //       return job?.jobData?.jobType?.includes(filterData?.employment);
+  //     }
+  //     return true; // No filter applied
+  //   };
+
+  //   const salaryFilter = (job) => {
+  //     if (filterData?.salary) {
+  //       return parseInt(job?.jobData?.salary) > parseInt(filterData?.salary);
+  //     }
+  //     return true; // No filter applied
+  //   };
+
+  //   const expFilter = (job) => {
+  //     if (filterData?.exp) {
+  //       return parseInt(job?.jobData?.experience) < parseInt(filterData?.exp);
+  //     }
+  //     return true;
+  //   };
+
+  //   // Apply the filters to the data
+  //   const filteredData = aboutData?.jobs?.filter((job) => {
+  //     return employmentFilter(job) && salaryFilter(job) && expFilter(job);
+  //   });
+
+  //   setFinalData(filteredData);
+  // }, [aboutData, filterData]);
 
   // prevneting the employer to access this -------------------
   useEffect(() => {
@@ -98,12 +156,10 @@ const SearchEmployee = () => {
           </div>
 
           <section className="w-full flex flex-col gap-8">
-            <EmployeeCard />
-            <EmployeeCard />
-            <EmployeeCard />
-            <EmployeeCard />
-            <EmployeeCard />
-            <EmployeeCard />
+            {aboutData &&
+              aboutData?.employees?.map((element) => {
+                return <EmployeeCard key={element?._id} {...element} />;
+              })}
           </section>
         </div>
       </section>
