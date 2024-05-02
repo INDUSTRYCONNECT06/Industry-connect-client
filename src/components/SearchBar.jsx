@@ -59,13 +59,13 @@ const SearchBar = ({position,location}) => {
 
   return (
     <form
-      className="w-2/3 h-[73px] px-10 rounded-xl relative grid grid-cols-2 shadow-lg"
+      className="w-[90%] md:w-2/3 h-[50px] md:h-[73px] px-2 md:px-10 rounded-xl relative grid grid-cols-1 md:grid-cols-2 shadow-lg"
       onSubmit={onSubmit}
     >
-      <section className="flex items-center gap-4 w-5/6">
+      <section className="flex items-center gap-2 md:gap-4 w-full md:w-5/6">
         <AiOutlineSearch size={25} />
 
-        <div className="flex w-full flex-col relative" onClick={(e)=>{e?.stopPropagation()}}>
+        <div className="flex w-full flex-col relative text-xs md:text-sm" onClick={(e)=>{e?.stopPropagation()}}>
           <input
             type="text"
             placeholder="What position are you looking for ?"
@@ -77,7 +77,7 @@ const SearchBar = ({position,location}) => {
             autoComplete="off"
           />
           {CloseModal?.position && (
-            <div className="flex flex-col absolute top-[50px] bg-white gap-2 w-full shadow-md box-border z-40">
+            <div className="flex flex-col absolute top-10 md:top-[50px] bg-[#f7f7f7] gap-2 w-max md:w-full shadow-md box-border z-40">
               {jobsData
                 ?.filter((e, i) => {
                   return e
@@ -102,7 +102,7 @@ const SearchBar = ({position,location}) => {
           )}
         </div>
       </section>
-      <section className="flex items-center gap-4 w-1/2">
+      {window.screen.width > 600 && <section className="flex items-center gap-4 w-1/2">
         <CiLocationOn size={25} />
 
         <div className="flex w-full flex-col relative" onClick={(e)=>{e?.stopPropagation()}}>
@@ -140,11 +140,11 @@ const SearchBar = ({position,location}) => {
             </div>
           )}
         </div>
-      </section>
+      </section>}
 
       <button
         type="submit"
-        className="w-[116px] h-[73px]  bg-main-blue-01 text-white absolute right-0"
+        className="w-20 md:w-[116px] h-[50px] md:h-[73px]  bg-main-blue-01 text-white absolute right-0 text-xs md:text-sm"
       >
         Apply now
       </button>

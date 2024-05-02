@@ -39,12 +39,12 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full my-16">
-      <div className="flex flex-col gap-10 items-center justify-center border border-[#E6E6E6] px-[52px] py-[47px] shadow-black rounded-md">
-        <h1 className="text-xl font-semibold">About Me</h1>
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+        <h1 className="text-lg md:text-xl font-semibold">About Me</h1>
 
         <form
-          className="flex flex-col w-[454px] items-center gap-6"
+          className="flex flex-col w-full md:w-[454px] items-center gap-6 text-sm md:text-lg"
           onSubmit={handleSubmit}
         >
           <input
@@ -103,7 +103,7 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
 
           <button
             type="submit"
-            className="w-[242px] bg-main-blue-01 rounded-lg py-3 text-xl text-white hover:scale-105 transition-transform"
+            className="w-[242px] bg-main-blue-01 rounded-lg py-2 md:py-3 text-sm md:text-xl text-white hover:scale-105 transition-transform"
           >
             Next
           </button>
@@ -147,12 +147,12 @@ const EducationForm = ({ setDisplayForm, dbData, updateAbout }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full my-16">
-      <div className="flex flex-col gap-10 items-center justify-center border border-[#E6E6E6] px-[52px] py-[47px] shadow-black rounded-md">
-        <h1 className="text-xl font-semibold">Education</h1>
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
+     <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+      <h1 className="text-lg md:text-xl font-semibold">Education</h1>
 
         <form
-          className="flex flex-col w-[454px] items-center gap-6"
+          className="flex flex-col w-full md:w-[454px] items-center gap-6 text-sm md:text-lg"
           onSubmit={handleSubmit}
         >
           <input
@@ -206,7 +206,7 @@ const EducationForm = ({ setDisplayForm, dbData, updateAbout }) => {
 
           <button
             type="submit"
-            className="w-[242px] bg-main-blue-01 rounded-lg py-3 text-xl text-white hover:scale-105 transition-transform"
+            className="w-[242px] bg-main-blue-01 rounded-lg py-2 md:py-3 text-sm md:text-xl text-white hover:scale-105 transition-transform"
           >
             Next
           </button>
@@ -258,14 +258,14 @@ const ExperienceForm = ({ setDisplayForm, dbData, updateAbout }) => {
   };
 
   return (
-    <div className="flex items-center flex-col justify-center w-full my-16 gap-10">
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
       {/* {data?.map((form, index) => {
           return ( */}
-      <div className="flex flex-col gap-10 items-center justify-center border border-[#E6E6E6] px-[52px] py-[47px] shadow-black rounded-md">
-        <h1 className="text-xl font-semibold">Experience</h1>
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+      <h1 className="text-lg md:text-xl font-semibold">Experience</h1>
 
-        <form
-          className="flex flex-col w-[454px] items-center gap-6"
+      <form
+          className="flex flex-col w-full md:w-[454px] items-center gap-6 text-sm md:text-lg"
           onSubmit={handleSubmit}
         >
           <div className="w-full relative">
@@ -393,7 +393,7 @@ const ExperienceForm = ({ setDisplayForm, dbData, updateAbout }) => {
 
           <button
             type="submit"
-            className="w-[242px] bg-main-blue-01 rounded-lg py-3 text-xl text-white hover:scale-105 transition-transform"
+            className="w-[242px] bg-main-blue-01 rounded-lg py-2 md:py-3 text-sm md:text-xl text-white hover:scale-105 transition-transform"
           >
             Next
           </button>
@@ -442,15 +442,15 @@ const SkillsForm = ({ dbData, updateAbout }) => {
   }, [dbData]);
 
   return (
-    <div className="flex items-center justify-center w-full my-8">
-      <div className="flex flex-col gap-10 items-center justify-center border border-[#E6E6E6] px-[52px] py-[47px] shadow-black rounded-md">
-        <h1 className="text-xl font-semibold">Skills</h1>
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
+    <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+      <h1 className="text-lg md:text-xl font-semibold">Skills</h1>
 
-        <span className="text-sm -mt-5">
+        <span className="text-xs md:text-sm -mt-5 text-center">
           Stand out to top recruiters with relevant skills.
         </span>
 
-        <div className="flex items-center w-[400px] p-5 border gap-2 border-[#5858581F] relative">
+        <div className="flex items-center w-full md:w-[400px] p-2 md:p-5 border gap-2 border-[#5858581F] relative text-sm">
           <AiOutlineSearch />
           <input
             type="text"
@@ -468,7 +468,7 @@ const SkillsForm = ({ dbData, updateAbout }) => {
             }}
           />
           {CloseModal && (
-            <div className="flex flex-col absolute left-0 top-[70px] bg-[#e3e3e3] gap-2 w-full shadow-md box-border z-50">
+            <div className="flex flex-col absolute left-0 top-[70px] bg-[#e3e3e3] gap-2 w-full shadow-md box-border z-50 flex-wrap">
               {skillsData
                 ?.filter((e, i) => {
                   return (
@@ -495,15 +495,15 @@ const SkillsForm = ({ dbData, updateAbout }) => {
             </div>
           )}
         </div>
-        <span className="w-full text-[10px] -mt-7 text-gray-500">
+        <span className="w-full text-[10px] -mt-4 md:-mt-7 text-gray-500">
           Add between 5-10 skills and get noticed by HR
         </span>
 
-        <div className="flex flex-wrap items-center justify-center gap-5 min-h-[50px] max-w-[400px]">
+        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-5 min-h-[50px] w-full md:max-w-[400px]">
           {skills?.map((e2, index) => {
             return (
               <span
-                className="rounded-md bg-main-blue-01 text-white font-bold px-[13px] py-[5px] flex items-center gap-2"
+                className="rounded-md bg-main-blue-01 text-white font-bold px-2 md:px-[13px] py-[5px] flex items-center gap-2 text-xs md:text-sm"
                 key={e2}
               >
                 {e2}{" "}
@@ -525,7 +525,7 @@ const SkillsForm = ({ dbData, updateAbout }) => {
         </div>
 
         <button
-          className="w-[242px] bg-main-blue-01 rounded-lg py-3 text-xl text-white hover:scale-105 transition-transform mt-8"
+         className="w-[242px] bg-main-blue-01 rounded-lg py-2 md:py-3 text-sm md:text-xl text-white hover:scale-105 transition-transform"
           onClick={handleSubmit}
         >
           Save

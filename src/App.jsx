@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Main from "./pages/Main";
@@ -15,9 +15,11 @@ import { loginContext } from "./Context/LoginState";
 import { useContext, useEffect } from "react";
 import EmployeeState from "./Context/EmployeeState";
 import Employee from "./RouteControllers/Employee";
+import MobileNav from "./components/mobileNav";
 
 export default function App() {
   const { checkAndVerifyLoginUser } = useContext(loginContext);
+  const location = useLocation();
 
   useEffect(() => {
     if (localStorage.getItem("jwtToken")) {
@@ -29,8 +31,6 @@ export default function App() {
     <>
       {/* prevent input number default mobuse scrolling changes ----------- */}
       <PreventNumberInputScrolling />
-
-      <BrowserRouter>
         <EmployerState>
           <EmployeeState>
             <Navbar />
@@ -47,11 +47,20 @@ export default function App() {
               <Route path="/employee/*" element={<Employee />} />
             </Routes>
 
-            <Footer />
+            {/* <Footer /> */}
+            {["/search/jobs","/employee/about","/employee/saved","/employee/applied"].includes(location.pathname) &&
+            window.screen.width < 600 &&
+            localStorage.getItem("jwtToken") ? (
+              <>
+              <div className="py-8 w-full"></div>
+              <MobileNav />
+              </>
+            ) : (
+              <Footer />
+            )}
           </EmployeeState>
         </EmployerState>
-      </BrowserRouter>
-      <Toaster position="top-center" gutter={10}/>
+      <Toaster position="top-center" gutter={10} />
     </>
   );
 }

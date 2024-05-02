@@ -24,7 +24,7 @@ const EmployerState = (props) => {
 
     if (result?.success) {
       localStorage.setItem("jwtToken", result?.jwtToken);
-        window.open("/","_self")
+        window.open("/employer/about","_self")
 
     } else {
       toast.error("Some error occured in logging, Please Try Again!!!");

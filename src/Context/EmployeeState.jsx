@@ -84,10 +84,9 @@ const EmployeeState = (props) => {
   };
 
 
-
   return (
-    <employeeContext.Provider value={{ loginEmployee,bookMarkJob,applyForJob,updateAbout }}>
-      {props.children}
+    <employeeContext.Provider value={{ loginEmployee,bookMarkJob,applyForJob,updateAbout}}>
+      {props?.children}
     </employeeContext.Provider>
   );
 };

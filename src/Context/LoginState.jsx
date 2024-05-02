@@ -11,7 +11,7 @@ const LoginState = (props) => {
   const googleSuccessLogin = async () => {
    
     let response = await fetch(
-      `${import.meta.env.VITE_HOST}/google/login/success`,
+      `${import.meta.env.VITE_HOST}/api/google/login/success`,
       {
         method: "GET",
         credentials: "include",
@@ -42,9 +42,7 @@ const LoginState = (props) => {
   // 2. Check/verify  and fetch user login details route ---------------
   const checkAndVerifyLoginUser = async () => {
     let result = await fetch(
-      `${
-        import.meta.env.VITE_HOST
-      }/google/checkAndFetchLoginData?userType=${localStorage.getItem(
+      `${import.meta.env.VITE_HOST}/api/google/checkAndFetchLoginData?userType=${localStorage.getItem(
         "userType"
       )}`,
       {
@@ -78,7 +76,7 @@ const LoginState = (props) => {
 //   logout the user
   const LogoutUser = async () =>{
     await fetch(
-        `${import.meta.env.VITE_HOST}/google/logout`,
+        `${import.meta.env.VITE_HOST}/api/google/logout`,
         {
           method: "GET",
           headers: {

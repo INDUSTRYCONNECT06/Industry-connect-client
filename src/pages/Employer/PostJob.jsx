@@ -315,7 +315,6 @@ const PostJob = () => {
                 type="number"
                 onChange={handleChange}
                 className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
-                required
               />
               <input
                 placeholder="Salary (in INR)"
@@ -324,7 +323,6 @@ const PostJob = () => {
                 type="number"
                 onChange={handleChange}
                 className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
-                required
               />
             </section>
 

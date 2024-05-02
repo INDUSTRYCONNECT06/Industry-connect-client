@@ -13,7 +13,11 @@ const EmployeeCard = ({name,profile,location,educationDetails,experienceDetails,
       <img
         src={profile}
         alt="employee"
-        className="w-16 h-16 rounded-md"
+        className="w-16 h-16 rounded-md object-cover"
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src="https://i.pinimg.com/474x/76/4d/59/764d59d32f61f0f91dec8c442ab052c5.jpg"
+        }}
       />
       <section className="flex flex-col gap-1">
         <h5 className="text-md text-[#141414] font-normal">{name}</h5>
@@ -22,12 +26,12 @@ const EmployeeCard = ({name,profile,location,educationDetails,experienceDetails,
         </h3>
 
         <div className="flex gap-12 text-[#141414b2] text-sm mt-1">
-          <span className="flex items-center gap-1">
+          {location && <span className="flex items-center gap-1">
             <CiLocationOn size={18} /> {location}
-          </span>
-          <span className="flex items-center gap-1">
+          </span>}
+          {educationDetails && <span className="flex items-center gap-1">
             <HiOutlineBookOpen /> {educationDetails?.degree}, {educationDetails?.field}
-          </span>
+          </span>}
         </div>
 
 
@@ -91,38 +95,7 @@ const SearchEmployee = () => {
     setFilterData({ ...filterData, [e.target.name]: e.target.id });
   };
 
-  // // handling the filter and again showing the data ---------------
-  // useEffect(() => {
-  //   const employmentFilter = (job) => {
-  //     if (filterData?.employment) {
-  //       return job?.jobData?.jobType?.includes(filterData?.employment);
-  //     }
-  //     return true; // No filter applied
-  //   };
 
-  //   const salaryFilter = (job) => {
-  //     if (filterData?.salary) {
-  //       return parseInt(job?.jobData?.salary) > parseInt(filterData?.salary);
-  //     }
-  //     return true; // No filter applied
-  //   };
-
-  //   const expFilter = (job) => {
-  //     if (filterData?.exp) {
-  //       return parseInt(job?.jobData?.experience) < parseInt(filterData?.exp);
-  //     }
-  //     return true;
-  //   };
-
-  //   // Apply the filters to the data
-  //   const filteredData = aboutData?.jobs?.filter((job) => {
-  //     return employmentFilter(job) && salaryFilter(job) && expFilter(job);
-  //   });
-
-  //   setFinalData(filteredData);
-  // }, [aboutData, filterData]);
-
-  // prevneting the employer to access this -------------------
   useEffect(() => {
     if (
       localStorage.getItem("jwtToken") &&
@@ -133,6 +106,11 @@ const SearchEmployee = () => {
   }, []);
 
   return (
+
+    <>
+
+{window.screen.width > 900 ? 
+
     <div className="flex flex-col gap-8 items-center justify-center mt-10">
       <h1 className="text-4xl font-bold uppercase">
         SEARCH <span className="text-main-blue-01">EMPLOYEES</span>
@@ -145,14 +123,14 @@ const SearchEmployee = () => {
 
       <section className="w-[85vw] p-10 bg-[#FAFAFA] my-10 flex items-start justify-between h-max">
         {/* Filters section ------------------ */}
-        <div className="bg-white w-[250px] p-6 box-border">
+        {/* <div className="bg-white w-[250px] p-6 box-border">
           <h2 className="text-xl font-bold">Filters</h2>
-        </div>
+        </div> */}
 
         {/* Employee list */}
-        <div className="w-3/4 p-6 ">
+        <div className="w-full p-6 ">
           <div className="mb-6">
-            <span className="text-3xl font-semibold">3177 Employees</span>
+            <span className="text-3xl font-semibold">{aboutData?.employees?.length} Employees</span>
           </div>
 
           <section className="w-full flex flex-col gap-8">
@@ -164,6 +142,12 @@ const SearchEmployee = () => {
         </div>
       </section>
     </div>
+
+    :  <div className="w-full h-screen flex items-center justify-center">Dashboard available only on Desktops</div>
+
+            }
+
+    </>
   );
 };
 

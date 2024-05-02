@@ -21,14 +21,19 @@ const Employer = () => {
 
     process();
   }, []);
-  
 
   return (
-    <Routes>
-      <Route path="about" element={<About />} />
-      <Route path="postjob" element={<PostJob />} />
-      <Route path="dashboard" element={<Dashboard />} />
-    </Routes>
+    <>
+      {window.screen.width > 900 ? (
+        <Routes>
+          <Route path="about" element={<About />} />
+          <Route path="postjob" element={<PostJob />} />
+          <Route path="dashboard/*" element={<Dashboard />} />
+        </Routes>
+      ) : (
+        <div className="w-full h-screen flex items-center justify-center">Dashboard available only on Desktops</div>
+      )}
+    </>
   );
 };
 

@@ -53,7 +53,7 @@ const About = () => {
       if (json?.firstTime) {
         navigate("/employer/postajob");
       } else {
-        navigate("/search/employes");
+        navigate("/employer/dashboard");
       }
     }
   };
