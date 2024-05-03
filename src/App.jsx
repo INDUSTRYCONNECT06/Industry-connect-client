@@ -15,7 +15,7 @@ import { loginContext } from "./Context/LoginState";
 import { useContext, useEffect } from "react";
 import EmployeeState from "./Context/EmployeeState";
 import Employee from "./RouteControllers/Employee";
-import MobileNav from "./components/mobileNav";
+import MobileNav from "./components/MobileNav";
 
 export default function App() {
   const { checkAndVerifyLoginUser } = useContext(loginContext);
