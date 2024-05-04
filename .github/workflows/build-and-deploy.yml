@@ -10,10 +10,10 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     env:
-      BUCKET: industry-connect-client
+      BUCKET: industry-connect
       DIST: dist
       REGION: ap-south-1
-      DIST_ID_CLOUDFRONT: EX1RCPCSQ7TWW
+      DIST_ID_CLOUDFRONT: EY410224PU3Z9
 
     steps:
       - name: Checkout code

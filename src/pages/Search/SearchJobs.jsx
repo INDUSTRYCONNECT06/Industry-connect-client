@@ -77,46 +77,57 @@ export const JobCard = ({
     }
   };
 
+  console.log(jobData);
+
   return (
     <div className="w-full bg-white box-border p-3 md:p-6 flex items-start gap-3 md:gap-6 relative pb-16 md:pb-20">
       <img
         src={
+          jobData?.companyName === orgData?.name ?
           orgData?.profile
             ? orgData?.profile
             : jobData?.result
             ? jobData?.result[0]?.profile
             : "https://static.thenounproject.com/png/5572513-200.png"
+
+            : "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png"
+            
         }
         alt="employee"
+        onError={({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src =
+            "https://i.pinimg.com/474x/76/4d/59/764d59d32f61f0f91dec8c442ab052c5.jpg";
+        }}
         className="w-8 h-8 md:w-14 md:h-14 rounded-md"
       />
       <section className="flex flex-col gap-2">
         <div className="flex flex-col gap-1">
           <h5 className="text-xs md:text-sm text-[#141414] font-normal">
-            {orgData?.name}
+            {jobData?.companyName ?? orgData?.name}
           </h5>
           <h3 className="text-sm md:text-xl text-[#141414] font-semibold w-2/3 md:w-3/4 leading-4">
             {jobData?.title}
           </h3>
         </div>
 
-        <div className="flex gap-x-4 gap-y-2 md:gap-12 text-[#141414b2] text-xs md:text-sm mt-1 flex-wrap">
-          <span className="flex items-center gap-2">
+        <div className="flex gap-x-4 gap-y-2 md:gap-x-12 md:gap-y-5 text-[#141414b2] text-xs md:text-sm mt-1 flex-wrap">
+          {jobData?.location && <span className="flex items-center gap-2">
             <CiLocationOn size={18} />
             {jobData?.location}
-          </span>
-          <span className="flex items-center gap-2">
+          </span>}
+          {jobData?.jobType &&<span className="flex items-center gap-2">
             <AiOutlineClockCircle size={18} />
             {jobData?.jobType}
-          </span>
-          <span className="flex items-center gap-2">
+          </span>}
+          {jobData?.salary && <span className="flex items-center gap-2">
             <BiRupee size={18} />
-            {jobData?.salary}
-          </span>
-          <span className="flex items-center gap-2">
+            {jobData?.salary + " " + jobData?.salary_freq?.toLowerCase()}
+          </span>}
+          {jobData?.createdAt && <span className="flex items-center gap-2">
             <SlCalender size={18} />
             {moment(jobData?.createdAt).fromNow()}
-          </span>
+          </span>}
         </div>
 
         {jobData?.description && (
