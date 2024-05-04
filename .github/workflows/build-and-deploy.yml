@@ -33,6 +33,7 @@ jobs:
           npm install
           touch .env
           echo VITE_HOST = https://api.industryconnect.co.in > .env
+          echo VITE_MIXPANEL_TOKEN = "985a88982093e5ae6a4844cb43ae1b95" >> .env
           npm run build
 
       - name: Copy files to S3 storage
