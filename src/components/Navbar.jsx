@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { loginContext } from "../Context/LoginState";
+import mixpanel from "mixpanel-browser";
 
 const Navbar = () => {
   const { loginUserInfo, LogoutUser } = useContext(loginContext);
@@ -35,7 +36,7 @@ const Navbar = () => {
 
   return (
     <div className="flex items-center justify-between px-4 md:px-32 md:py-7 py-4 w-full box-border">
-      <Link to="/">
+      <Link to="/" onClick={()=>{mixpanel.track("Logo Clicked on Navbar")}}>
         <img src={"/logo.png"} alt="logo" className="w-36 md:w-60 cursor-pointer" onError={({ currentTarget }) => {
           currentTarget.onerror = null; // prevents looping
           currentTarget.src="https://i.pinimg.com/474x/76/4d/59/764d59d32f61f0f91dec8c442ab052c5.jpg"
@@ -47,12 +48,14 @@ const Navbar = () => {
           <>
             <Link
               to="/login"
+              onClick={()=>{mixpanel.track("Login Clicked on Navbar")}}
               className="text-sm md:text-xl font-medium text-[#8A8A8A] cursor-pointer hover:scale-105 transition-transform"
             >
               Login
             </Link>
            {window.screen.width > 600 && <Link
               to="/login"
+              onClick={()=>{mixpanel.track("Post a Job Clicked on Navbar")}}
               className="text-sm md:text-xl font-medium text-main-blue-01 cursor-pointer hover:scale-105 transition-transform"
             >
               Post a job
@@ -62,6 +65,7 @@ const Navbar = () => {
           <>
             {localStorage.getItem("userType") === "employer" && window.location.pathname !== "/employer/dashboard" && <Link
               to="/employer/dashboard"
+              onClick={()=>{mixpanel.track("Dashboard Clicked on Navbar")}}
               className="text-sm md:text-xl font-medium text-main-blue-01 cursor-pointer hover:scale-105 transition-transform"
             >
               Dashboard
@@ -80,6 +84,7 @@ const Navbar = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 setOpenOptions(!openOptions);
+                mixpanel.track("Profile Clicked on Navbar")
               }}
             />
           </>
@@ -110,31 +115,38 @@ const Navbar = () => {
             </section>
 
             <section className="flex flex-col gap-4 w-full text-[#757575] text-sm font-normal pl-2 ">
-              <Link to={`/${localStorage.getItem("userType")}/about`}>
+              <Link to={`/${localStorage.getItem("userType")}/about`} onClick={()=>{mixpanel.track("Edit profile Clicked on Navbar Options")}}>
                 <span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
                   Edit Profile
                 </span>
               </Link>
 
               {localStorage.getItem("userType") === "employer" && (
-                <Link to="/employer/postjob">
+                <Link to="/employer/postjob" onClick={()=>{mixpanel.track("Post Job Clicked on Navbar Options")}}>
                   <span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
                     Post a job
                   </span>
                 </Link>
               )}
 
-{localStorage.getItem("userType") === "employee" && <Link to="/employee/saved">
+{localStorage.getItem("userType") === "employee" && <Link to="/employee/saved" onClick={()=>{mixpanel.track("Saved jobs Clicked on Navbar Options")}}>
               <span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
                 Saved List
               </span></Link>}
 
-              {localStorage.getItem("userType") === "employee" && <Link to="/employee/applied"><span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
+              {localStorage.getItem("userType") === "employee" && <Link to="/employee/applied" onClick={()=>{mixpanel.track(" Connect With Us Clicked on Navbar Options")}}><span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
                 Applied Jobs
               </span></Link> }
               <span
                 className="cursor-pointer hover:text-main-blue-01 hover:font-semibold"
-                onClick={handleLogout}
+                onClick={()=>{window.open("https://www.linkedin.com/in/industry-connect-4a6119300")}}
+              >
+                Connect With Us
+              </span>
+
+              <span
+                className="cursor-pointer hover:text-main-blue-01 hover:font-semibold"
+                onClick={()=>{handleLogout();mixpanel.track("Logout Clicked on Navbar Options")}}
               >
                 Logout
               </span>

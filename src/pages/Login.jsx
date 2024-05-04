@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
+import mixpanel from "mixpanel-browser";
 
 const Popup = ({Close}) => {
 
@@ -15,12 +16,12 @@ const Popup = ({Close}) => {
       <div className="flex flex-col gap-10 items-center justify-center border border-[#E6E6E6] px-8 py-10 md:px-[52px] md:py-[107px] shadow-black rounded-md bg-white">
         <h1 className="text-xl font-semibold">You Want To </h1>
         <button className="w-72 md:w-96 px-10 md:px-20 py-4 border border-[rgba(117, 117, 117, 0.11)] rounded-lg  text-md font-normal text-[#0000008A] transition-transform hover:scale-105 hover:bg-main-blue-01 hover:text-white flex items-center gap-4 justify-center"
-          onClick={()=>{handleClick("get")}}
+          onClick={()=>{handleClick("get");mixpanel.track("Get a job on Popup")}}
         >
           Get a job
         </button>
         <button className="w-72 md:w-96 px-10 md:px-20 py-4 border border-[rgba(117, 117, 117, 0.11)] rounded-lg text-md font-normal text-[#0000008A] transition-transform hover:scale-105 hover:bg-main-blue-01 hover:text-white flex items-center gap-4 justify-center"
-          onClick={()=>{handleClick("hire")}}
+          onClick={()=>{handleClick("hire");mixpanel.track("Hire Now on Popup")}}
         >
           Hire Now
         </button>
@@ -44,6 +45,7 @@ const Login = () => {
 
 
   const handleGoogleLogin = async () =>{
+    mixpanel.track("Sign in with google")
     window.open(`${import.meta.env.VITE_HOST}/api/google/auth`, "_self");
   }
 
@@ -66,9 +68,9 @@ const Login = () => {
           >
             <FcGoogle size={25} /> Sign In with Google
           </button>
-          <button className="w-72 md:w-96 px-10 md:px-20 py-4 border border-[rgba(117, 117, 117, 0.11)] rounded-lg text-md font-normal text-[#0000008A] transition-transform hover:scale-105 hover:bg-main-blue-01 hover:text-white flex items-center gap-4 justify-center">
+          {/* <button className="w-72 md:w-96 px-10 md:px-20 py-4 border border-[rgba(117, 117, 117, 0.11)] rounded-lg text-md font-normal text-[#0000008A] transition-transform hover:scale-105 hover:bg-main-blue-01 hover:text-white flex items-center gap-4 justify-center">
             <BsFacebook size={25} color="#000AFF"/> Sign In with Facebook
-          </button>
+          </button> */}
 
           <span className="w-3/4 text-sm text-[#0000008A] text-center">
             By continuing, I agree to the Terms of Use & Privacy Policy

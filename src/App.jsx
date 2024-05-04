@@ -16,11 +16,20 @@ import { useContext, useEffect } from "react";
 import EmployeeState from "./Context/EmployeeState";
 import Employee from "./RouteControllers/Employee";
 import MobileNav from "./components/MobileNav";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import mixpanel from 'mixpanel-browser';
 
 export default function App() {
   const { checkAndVerifyLoginUser } = useContext(loginContext);
+  mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN, {debug: true, persistence: 'localStorage'});
+
   const location = useLocation();
 
+  useEffect(() => {
+    mixpanel.track_pageview({})
+  }, [location])
+  
   useEffect(() => {
     if (localStorage.getItem("jwtToken")) {
       checkAndVerifyLoginUser();
@@ -40,6 +49,9 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/search/jobs" element={<SearchJobs />} />
               <Route path="/search/employees" element={<SearchEmployee />} />
+              <Route path="/privacy-policy" element={<Privacy />} />
+              <Route path="/terms-conditions" element={<Terms />} />
+
 
               {/* Route Conrollers -------------- */}
               <Route path="/check" element={<Check />} />

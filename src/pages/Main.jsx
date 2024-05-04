@@ -7,6 +7,7 @@ import { MdDone } from "react-icons/md";
 import heroImg from "../assets/images/heroimg.png";
 import { useNavigate } from "react-router-dom";
 import loaderGIF from "../assets/images/loader.gif";
+import mixpanel from "mixpanel-browser"
 
 const dataObj = [
   {
@@ -82,6 +83,7 @@ const Main = () => {
                 onClick={() => {
                   handleClick("get");
                   setActiveButton("get");
+                  mixpanel.track("Get a job")
                 }}
               >
                 Get a job
@@ -91,6 +93,7 @@ const Main = () => {
                 onClick={() => {
                   handleClick("hire");
                   setActiveButton("hire");
+                  mixpanel.track("Hire Now")
                 }}
               >
                 Hire Now

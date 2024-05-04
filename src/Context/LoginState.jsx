@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import toast from "react-hot-toast";
+import mixpanel from "mixpanel-browser";
 
 export const loginContext = createContext();
 
@@ -88,6 +89,7 @@ const LoginState = (props) => {
       );
       localStorage.removeItem("jwtToken");
       localStorage.removeItem("userType");
+      mixpanel.reset()
       toast.success("Logged Out Successfully",{
         position:"top-center",
         duration:1500

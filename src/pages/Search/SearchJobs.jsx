@@ -77,8 +77,6 @@ export const JobCard = ({
     }
   };
 
-  console.log(jobData);
-
   return (
     <div className="w-full bg-white box-border p-3 md:p-6 flex items-start gap-3 md:gap-6 relative pb-16 md:pb-20">
       <img
