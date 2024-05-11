@@ -22,6 +22,7 @@ const Footer = () => {
           className="text-md text-[#FEFEFE] font-light mb-5 md:mb-5 cursor-pointer underline"
           onClick={() => {
             mixpanel.track(" Privacy Policy footer");
+            window.open("/privacy-policy")
           }}
         >
           Privacy Policy
@@ -30,6 +31,7 @@ const Footer = () => {
           className="text-md text-[#FEFEFE] font-light mb-5 md:mb-5 cursor-pointer underline"
           onClick={() => {
             mixpanel.track("Terms & Conditions footer");
+            window.open("/terms-conditions")
           }}
         >
           Terms & Conditions

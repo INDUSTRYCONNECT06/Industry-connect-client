@@ -4,10 +4,20 @@ import toast from "react-hot-toast";
 import { employeeContext } from "../../Context/EmployeeState";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { jobTypes, jobsData, skillsData } from "../../assets/data/sample";
+import { FaBook } from "react-icons/fa";
+import {
+  citiesData,
+  jobTypes,
+  jobsData,
+  skillsData,
+} from "../../assets/data/sample";
 import { MdCancel } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { GiAchievement } from "react-icons/gi";
+import { TbFileAnalytics } from "react-icons/tb";
 
 const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
+  const [CloseModal, setCloseModal] = useState(false);
   const [data, setData] = useState({
     originalName: "",
     location: "",
@@ -36,6 +46,13 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
+
+    if (e.target.name === "location") {
+      setCloseModal(true);
+      if (e.target.value === "") {
+        setCloseModal(false);
+      }
+    }
   };
 
   return (
@@ -69,16 +86,46 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
             minLength={10}
             maxLength={10}
           />
-          <input
-            type="text"
-            placeholder="Location"
-            name="location"
-            id="location"
-            value={data?.location}
-            onChange={handleChange}
-            className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
-            required
-          />
+
+          <div className="w-full relative">
+            <input
+              type="text"
+              placeholder="Location"
+              name="location"
+              id="location"
+              value={data?.location}
+              onChange={handleChange}
+              className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
+              required
+              autoComplete="off"
+            />
+            {CloseModal && (
+              <div className="flex flex-col absolute top-[55px] bg-[#e3e3e3] gap-2 w-full shadow-md box-border z-50">
+                {citiesData
+                  ?.filter((e, i) => {
+                    return e
+                      ?.toLowerCase()
+                      .startsWith(data?.location?.toLowerCase());
+                  })
+                  ?.slice(0, 6)
+                  ?.map((e, i) => {
+                    return (
+                      <span
+                        key={i}
+                        className=" py-3 px-6 w-full cursor-pointer hover:bg-main-blue-01 hover:text-white"
+                        onClick={() => {
+                          setData({ ...data, location: e });
+                          setCloseModal(false);
+                        }}
+                      >
+                        {e}
+                      </span>
+                    );
+                  })}
+              </div>
+            )}
+          </div>
+
           <input
             placeholder="Linkedin id"
             name="linkedinLink"
@@ -87,7 +134,6 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
             value={data?.linkedinLink}
             onChange={handleChange}
             className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
-            required
           />
           <input
             placeholder="Email id"
@@ -148,8 +194,8 @@ const EducationForm = ({ setDisplayForm, dbData, updateAbout }) => {
 
   return (
     <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
-     <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
-      <h1 className="text-lg md:text-xl font-semibold">Education</h1>
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+        <h1 className="text-lg md:text-xl font-semibold">Education</h1>
 
         <form
           className="flex flex-col w-full md:w-[454px] items-center gap-6 text-sm md:text-lg"
@@ -176,7 +222,7 @@ const EducationForm = ({ setDisplayForm, dbData, updateAbout }) => {
           />
           <input
             type="text"
-            placeholder="Field of Study"
+            placeholder="Field of Study / Branch"
             name="field"
             id="field"
             value={data?.field}
@@ -194,15 +240,21 @@ const EducationForm = ({ setDisplayForm, dbData, updateAbout }) => {
             className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
             required
           />
-          <input
-            placeholder="Education Type"
-            name="education"
+          <select
+            className="w-full border border-[#5858581F] rounded-lg h-[51px] px-1 py-2"
             id="education"
-            value={data?.education}
+            name="education"
             onChange={handleChange}
-            className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
             required
-          />
+            value={data?.education}
+            autoComplete="on"
+          >
+            <option value="" disabled selected className="text-[#adadad]">
+              Select Education Type
+            </option>
+            <option value="Regular">Regular</option>
+            <option value="Distance">Distance</option>
+          </select>
 
           <button
             type="submit"
@@ -262,9 +314,9 @@ const ExperienceForm = ({ setDisplayForm, dbData, updateAbout }) => {
       {/* {data?.map((form, index) => {
           return ( */}
       <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
-      <h1 className="text-lg md:text-xl font-semibold">Experience</h1>
+        <h1 className="text-lg md:text-xl font-semibold">Experience</h1>
 
-      <form
+        <form
           className="flex flex-col w-full md:w-[454px] items-center gap-6 text-sm md:text-lg"
           onSubmit={handleSubmit}
         >
@@ -357,7 +409,7 @@ const ExperienceForm = ({ setDisplayForm, dbData, updateAbout }) => {
             value={data?.to}
             onChange={handleChange}
             className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
-            max={new Date().toISOString().split('T')[0]} // Set max date to today
+            max={new Date().toISOString().split("T")[0]} // Set max date to today
             onFocus={(e) => {
               e.target.type = "date";
             }}
@@ -371,7 +423,6 @@ const ExperienceForm = ({ setDisplayForm, dbData, updateAbout }) => {
             rows={5}
             onChange={handleChange}
             className="w-full border border-[#5858581F] rounded-lg px-4 py-2"
-            required
           />
 
           {/* {data?.length === index+1 && <p
@@ -443,8 +494,8 @@ const SkillsForm = ({ dbData, updateAbout }) => {
 
   return (
     <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
-    <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
-      <h1 className="text-lg md:text-xl font-semibold">Skills</h1>
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+        <h1 className="text-lg md:text-xl font-semibold">Skills</h1>
 
         <span className="text-xs md:text-sm -mt-5 text-center">
           Stand out to top recruiters with relevant skills.
@@ -525,7 +576,7 @@ const SkillsForm = ({ dbData, updateAbout }) => {
         </div>
 
         <button
-         className="w-[242px] bg-main-blue-01 rounded-lg py-2 md:py-3 text-sm md:text-xl text-white hover:scale-105 transition-transform"
+          className="w-[242px] bg-main-blue-01 rounded-lg py-2 md:py-3 text-sm md:text-xl text-white hover:scale-105 transition-transform"
           onClick={handleSubmit}
         >
           Save
@@ -556,9 +607,29 @@ const About = () => {
   useEffect(() => {
     setDbData({ ...aboutData?.data });
   }, [aboutData]);
+  
 
   return (
-    <>
+      <div className="w-full px-2 md:px-32 box-border flex md:flex-row flex-col items-center md:items-start justify-between relative">
+      <div className="w-full flex flex-row md:flex-col items-start relative top-2 md:top-20">
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{setDisplayForm(1)}}>
+        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 1  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><CgProfile /></span> Personal Details
+        </p>
+        <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(2) : toast.error("Fill Personal Details Completely")}}>
+        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 2  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><FaBook /></span> Educational Details
+        </p>
+        <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(3) : toast.error("Fill Personal Details Completely")}}>
+        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 3  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><GiAchievement /></span>Your Experiences
+        </p>
+        <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(4) : toast.error("Fill Personal Details Completely")}}>
+        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 4  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><TbFileAnalytics /></span> Your Skills
+        </p>
+      </div>
+
+      <div>
       {displayForm === 1 ? (
         <AboutForm
           setDisplayForm={() => setDisplayForm(displayForm + 1)}
@@ -580,7 +651,12 @@ const About = () => {
       ) : (
         <SkillsForm dbData={dbData?.skills} updateAbout={updateAbout} />
       )}
-    </>
+      </div>
+
+      </div>
+
+
+    
   );
 };
 

@@ -25,17 +25,7 @@ const LoginState = (props) => {
     );
 
     let json = await response.json();
-
-    if (json?.success) {
-      return json?.res
-
-    }
-    else{
-      toast.error("Some error occured while logging in, Please try again !!!",{
-        position:'top-center',
-        duration:3000
-      });
-    }
+    return json;
 
   };
 
