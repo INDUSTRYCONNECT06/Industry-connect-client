@@ -614,15 +614,15 @@ const About = () => {
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 1  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><CgProfile /></span> Personal Details
         </p>
         <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(2) : toast.error("Fill Personal Details Completely")}}>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(2)}}>
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 2  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><FaBook /></span> Educational Details
         </p>
         <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(3) : toast.error("Fill Personal Details Completely")}}>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(3)}}>
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 3  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><GiAchievement /></span>Your Experiences
         </p>
         <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(4) : toast.error("Fill Personal Details Completely")}}>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(4)}}>
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 4  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><TbFileAnalytics /></span> Your Skills
         </p>
       </div>

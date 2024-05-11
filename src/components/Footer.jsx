@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
+
 import mixpanel from "mixpanel-browser";
 
 const Footer = () => {
-  const navigate = useNavigate();
 
   return (
     <div className="bg-main-blue-01 w-full py-10 md:py-20 flex flex-col items-center justify-center text-center">
@@ -39,7 +38,7 @@ const Footer = () => {
       </section>
 
       <span className="text-xs md:text-lg text-[#FEFEFE] font-light">
-        © 2023 INDUSTRY CONNECT. All Rights Reserved.
+        © 2024 INDUSTRY CONNECT. All Rights Reserved.
       </span>
     </div>
   );
