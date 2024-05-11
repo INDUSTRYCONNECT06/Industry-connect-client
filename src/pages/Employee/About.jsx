@@ -56,8 +56,8 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
-      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-2 md:px-4 box-border">
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-5 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
         <h1 className="text-lg md:text-xl font-semibold">About Me</h1>
 
         <form
@@ -193,8 +193,8 @@ const EducationForm = ({ setDisplayForm, dbData, updateAbout }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
-      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-2 md:px-4 box-border">
+    <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-5 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
         <h1 className="text-lg md:text-xl font-semibold">Education</h1>
 
         <form
@@ -310,10 +310,8 @@ const ExperienceForm = ({ setDisplayForm, dbData, updateAbout }) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
-      {/* {data?.map((form, index) => {
-          return ( */}
-      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-2 md:px-4 box-border">
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-5 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
         <h1 className="text-lg md:text-xl font-semibold">Experience</h1>
 
         <form
@@ -493,19 +491,19 @@ const SkillsForm = ({ dbData, updateAbout }) => {
   }, [dbData]);
 
   return (
-    <div className="flex items-center justify-center w-full my-8 md:my-16 px-4 box-border">
-      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-8 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+    <div className="flex items-center justify-center w-full my-8 md:my-16 px-2 md:px-4 box-border">
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-5 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
         <h1 className="text-lg md:text-xl font-semibold">Skills</h1>
 
         <span className="text-xs md:text-sm -mt-5 text-center">
           Stand out to top recruiters with relevant skills.
         </span>
 
-        <div className="flex items-center w-full md:w-[400px] p-2 md:p-5 border gap-2 border-[#5858581F] relative text-sm">
+        <div className="flex items-center w-full md:w-[450px] p-2 md:p-5 border gap-2 border-[#5858581F] relative text-sm">
           <AiOutlineSearch />
           <input
             type="text"
-            placeholder="Skills"
+            placeholder="Write and press enter"
             onChange={handleChange}
             value={data}
             className="focus:outline-none"
@@ -610,26 +608,26 @@ const About = () => {
   
 
   return (
-      <div className="w-full px-2 md:px-32 box-border flex md:flex-row flex-col items-center md:items-start justify-between relative">
-      <div className="w-full flex flex-row md:flex-col items-start relative top-2 md:top-20">
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{setDisplayForm(1)}}>
+      <div className="w-full px-2 pt-4 md:pt-0 md:px-32 box-border flex md:flex-row flex-col items-center md:items-start justify-between relative">
+      <div className="w-full flex flex-row md:flex-col items-start justify-between md:justify-start relative top-2 md:top-20">
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(1)}}>
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 1  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><CgProfile /></span> Personal Details
         </p>
         <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(2) : toast.error("Fill Personal Details Completely")}}>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(2) : toast.error("Fill Personal Details Completely")}}>
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 2  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><FaBook /></span> Educational Details
         </p>
         <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(3) : toast.error("Fill Personal Details Completely")}}>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(3) : toast.error("Fill Personal Details Completely")}}>
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 3  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><GiAchievement /></span>Your Experiences
         </p>
         <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(4) : toast.error("Fill Personal Details Completely")}}>
+        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{aboutData?.data?.mobNumber ? setDisplayForm(4) : toast.error("Fill Personal Details Completely")}}>
         <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 4  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><TbFileAnalytics /></span> Your Skills
         </p>
       </div>
 
-      <div>
+      <div className="w-full">
       {displayForm === 1 ? (
         <AboutForm
           setDisplayForm={() => setDisplayForm(displayForm + 1)}
