@@ -32,7 +32,8 @@ const PostJob = () => {
     salary: 0,
     description: "",
     jobCategory: null,
-    jobType:null
+    jobType: null,
+    salary_freq:null
   });
 
   const handleSubmit = async (e) => {
@@ -301,7 +302,6 @@ const PostJob = () => {
               id="totalVacancy"
               type="number"
               className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4"
-              required
               onChange={handleChange}
               maxLength={10}
               minLength={10}
@@ -317,14 +317,28 @@ const PostJob = () => {
                 className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
               />
               <input
-                placeholder="Salary (in INR)"
+                placeholder="Salary Range (in INR)"
                 name="salary"
                 id="salary"
-                type="number"
                 onChange={handleChange}
                 className="w-full border border-[#5858581F] rounded-lg h-[51px] px-4 py-2"
               />
             </section>
+              <select
+                className="w-full border border-[#5858581F] rounded-lg h-[51px] px-1 py-2"
+                id="salary_freq"
+                name="salary_freq"
+                onChange={handleChange}
+                value={data?.salary_freq}
+                autoComplete="on"
+              >
+                <option value="" disabled selected className="text-[#adadad]">
+                  Select Salary Frequency
+                </option>
+                <option value={"Weekly"}>Weekly</option>
+                <option value={"Monthly"}>Monthly</option>
+                <option value={"Yearly"}>Yearly</option>
+              </select>
 
             <textarea
               name="description"

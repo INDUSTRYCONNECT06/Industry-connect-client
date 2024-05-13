@@ -51,7 +51,7 @@ const About = () => {
 
     // newly logined user would go to post job -------
       if (json?.firstTime) {
-        navigate("/employer/postajob");
+        navigate("/employer/postjob");
       } else {
         navigate("/employer/dashboard");
       }
