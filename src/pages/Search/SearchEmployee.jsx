@@ -6,6 +6,7 @@ import SearchBar from "../../components/SearchBar";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../helpers/useFetch";
+import SeoTagger from "../../components/SeoTagger";
 
 const EmployeeCard = ({name,profile,location,educationDetails,experienceDetails,skills}) => {
   return (
@@ -147,6 +148,8 @@ const SearchEmployee = () => {
 
             }
 
+<SeoTagger title="SEARCH EMPLOYEES | INDUSTRY CONNECT" description="Attract top talent to your company by posting job openings on .
+Reach qualified candidates and fill positions efficiently"/>
     </>
   );
 };

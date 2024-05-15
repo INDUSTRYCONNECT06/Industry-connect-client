@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import mixpanel from "mixpanel-browser";
+import SeoTagger from "../components/SeoTagger";
 
 const Popup = ({Close}) => {
 
@@ -77,6 +78,9 @@ const Login = () => {
           </span>
         </div>
       </div>
+
+
+      <SeoTagger title={"Login | INDUSTRY CONNECT"} description={"Access your candidate account on to manage applications, update your profile, and discover new career opportunities"}/>
     </>
   );
 };

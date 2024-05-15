@@ -10,6 +10,7 @@ import {
 import { MdCancel } from "react-icons/md";
 import { employerContext } from "../../Context/EmployerState";
 import toast from "react-hot-toast";
+import mixpanel from "mixpanel-browser";
 
 const PostJob = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const PostJob = () => {
   });
 
   const handleSubmit = async (e) => {
+    mixpanel.track("Submit Job Post")
     e?.preventDefault();
 
     let json = await createJob({
@@ -131,6 +133,7 @@ const PostJob = () => {
                           onClick={() => {
                             setData({ ...data, title: e });
                             setCloseModal({ ...CloseModal, title: false });
+                            mixpanel.track("Selected Job Title",{jobTitle:e})
                           }}
                         >
                           {e}
@@ -212,6 +215,7 @@ const PostJob = () => {
                           onClick={() => {
                             setData({ ...data, location: e });
                             setCloseModal({ ...CloseModal, location: false });
+                            mixpanel.track("Selected Location",{location:e})
                           }}
                         >
                           {e}
@@ -286,6 +290,7 @@ const PostJob = () => {
                             setSkills([...skills, e]);
                             setData({ ...data, skills: "" });
                             setCloseModal({ ...CloseModal, skills: false });
+                            mixpanel.track("Selected Skill",{skill:e})
                           }}
                         >
                           {e}

@@ -10,6 +10,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import useFetch from "../../helpers/useFetch";
 import { employeeContext } from "../../Context/EmployeeState";
 import toast from "react-hot-toast";
+import SeoTagger from "../../components/SeoTagger";
+import mixpanel from "mixpanel-browser";
 
 export const JobCard = ({
   jobData,
@@ -40,8 +42,10 @@ export const JobCard = ({
 
       if (json?.success) {
         if (json?.status === 1) {
+          mixpanel.track("Job Bookmarked",{jobId:jobData?._id})
           setBookmarked(true);
         } else {
+          mixpanel.track("Job Bookmarked Removed",{jobId:jobData?._id})
           setBookmarked(false);
         }
       }
@@ -49,6 +53,9 @@ export const JobCard = ({
   };
 
   const handleSubmit = async () => {
+    mixpanel.track(jobApplied ? "Applied Button Clicked" : "Aplly job clicked",{
+      jobId: jobData?._id
+    })
     if (!jobApplied) {
       if (!localStorage.getItem("jwtToken")) {
         navigate("/login");
@@ -263,6 +270,8 @@ const SearchJobs = () => {
   }, []);
 
   return (
+    <>
+    
     <div className="flex flex-col gap-2 md:gap-8 items-center justify-center mt-6 md:mt-10">
       <h1 className="text-2xl md:text-4xl font-bold uppercase">
         SEARCH <span className="text-main-blue-01">JOBS</span>
@@ -448,6 +457,13 @@ const SearchJobs = () => {
         </div>
       </section>
     </div>
+
+
+
+    <SeoTagger title="SEARCH JOBS | INDUSTRY CONNECT" description="Explore a vast array of job listings in various industries. Apply to
+exciting opportunities that align with your expertise and interests."/>
+
+    </>
   );
 };
 

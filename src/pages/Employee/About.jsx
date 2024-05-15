@@ -15,6 +15,9 @@ import { MdCancel } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { GiAchievement } from "react-icons/gi";
 import { TbFileAnalytics } from "react-icons/tb";
+import SeoTagger from "../../components/SeoTagger";
+import mixpanel from "mixpanel-browser"
+
 
 const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
   const [CloseModal, setCloseModal] = useState(false);
@@ -31,6 +34,8 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
   }, [dbData]);
 
   const handleSubmit = async (e) => {
+    mixpanel.track("Submit about form")
+
     e?.preventDefault();
 
     let json = await updateAbout(data);
@@ -116,6 +121,7 @@ const AboutForm = ({ setDisplayForm, dbData, updateAbout }) => {
                         onClick={() => {
                           setData({ ...data, location: e });
                           setCloseModal(false);
+                          mixpanel.track("selected city", {city:e})
                         }}
                       >
                         {e}
@@ -194,7 +200,7 @@ const EducationForm = ({ setDisplayForm, dbData, updateAbout }) => {
 
   return (
     <div className="flex items-center justify-center w-full my-8 md:my-16 px-2 md:px-4 box-border">
-    <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-5 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
+      <div className="flex flex-col gap-6 md:gap-10 items-center justify-center border border-[#E6E6E6] w-full md:w-auto px-5 md:px-[52px] py-[47px] shadow-black rounded-md box-border">
         <h1 className="text-lg md:text-xl font-semibold">Education</h1>
 
         <form
@@ -605,56 +611,115 @@ const About = () => {
   useEffect(() => {
     setDbData({ ...aboutData?.data });
   }, [aboutData]);
-  
 
   return (
+    <>
       <div className="w-full px-2 pt-4 md:pt-0 md:px-32 box-border flex md:flex-row flex-col items-center md:items-start justify-between relative">
-      <div className="w-full flex flex-row md:flex-col items-start justify-between md:justify-start relative top-2 md:top-20">
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(1)}}>
-        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 1  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><CgProfile /></span> Personal Details
-        </p>
-        <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(2)}}>
-        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 2  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><FaBook /></span> Educational Details
-        </p>
-        <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(3)}}>
-        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 3  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><GiAchievement /></span>Your Experiences
-        </p>
-        <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
-        <p className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max" onClick={()=>{setDisplayForm(4)}}>
-        <span className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${displayForm === 4  ? "bg-main-blue-01 text-white" : "bg-white text-main-blue-01"}`}><TbFileAnalytics /></span> Your Skills
-        </p>
+        <div className="w-full flex flex-row md:flex-col items-start justify-between md:justify-start relative top-2 md:top-20">
+          <p
+            className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max"
+            onClick={() => {
+              setDisplayForm(1);
+            }}
+          >
+            <span
+              className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${
+                displayForm === 1
+                  ? "bg-main-blue-01 text-white"
+                  : "bg-white text-main-blue-01"
+              }`}
+            >
+              <CgProfile />
+            </span>{" "}
+            Personal Details
+          </p>
+          <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
+          <p
+            className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max"
+            onClick={() => {
+              setDisplayForm(2);
+            }}
+          >
+            <span
+              className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${
+                displayForm === 2
+                  ? "bg-main-blue-01 text-white"
+                  : "bg-white text-main-blue-01"
+              }`}
+            >
+              <FaBook />
+            </span>{" "}
+            Educational Details
+          </p>
+          <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
+          <p
+            className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max"
+            onClick={() => {
+              setDisplayForm(3);
+            }}
+          >
+            <span
+              className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${
+                displayForm === 3
+                  ? "bg-main-blue-01 text-white"
+                  : "bg-white text-main-blue-01"
+              }`}
+            >
+              <GiAchievement />
+            </span>
+            Your Experiences
+          </p>
+          <div className="hidden md:block md:h-20 p-[1px] bg-main-blue-01 relative left-5"></div>
+          <p
+            className="flex flex-col md:flex-row items-center gap-2 text-main-blue-01 text-xs text-center md:text-lg font-semibold uppercase cursor-pointer w-[140px] md:w-max"
+            onClick={() => {
+              setDisplayForm(4);
+            }}
+          >
+            <span
+              className={`p-3 border border-main-blue-01 rounded-full text-xl hover:bg-main-blue-01 hover:text-white ${
+                displayForm === 4
+                  ? "bg-main-blue-01 text-white"
+                  : "bg-white text-main-blue-01"
+              }`}
+            >
+              <TbFileAnalytics />
+            </span>{" "}
+            Your Skills
+          </p>
+        </div>
+
+        <div className="w-full">
+          {displayForm === 1 ? (
+            <AboutForm
+              setDisplayForm={() => setDisplayForm(displayForm + 1)}
+              dbData={dbData}
+              updateAbout={updateAbout}
+            />
+          ) : displayForm === 2 ? (
+            <EducationForm
+              setDisplayForm={() => setDisplayForm(displayForm + 1)}
+              dbData={dbData?.educationDetails}
+              updateAbout={updateAbout}
+            />
+          ) : displayForm === 3 ? (
+            <ExperienceForm
+              setDisplayForm={() => setDisplayForm(displayForm + 1)}
+              dbData={dbData?.experienceDetails}
+              updateAbout={updateAbout}
+            />
+          ) : (
+            <SkillsForm dbData={dbData?.skills} updateAbout={updateAbout} />
+          )}
+        </div>
       </div>
 
-      <div className="w-full">
-      {displayForm === 1 ? (
-        <AboutForm
-          setDisplayForm={() => setDisplayForm(displayForm + 1)}
-          dbData={dbData}
-          updateAbout={updateAbout}
-        />
-      ) : displayForm === 2 ? (
-        <EducationForm
-          setDisplayForm={() => setDisplayForm(displayForm + 1)}
-          dbData={dbData?.educationDetails}
-          updateAbout={updateAbout}
-        />
-      ) : displayForm === 3 ? (
-        <ExperienceForm
-          setDisplayForm={() => setDisplayForm(displayForm + 1)}
-          dbData={dbData?.experienceDetails}
-          updateAbout={updateAbout}
-        />
-      ) : (
-        <SkillsForm dbData={dbData?.skills} updateAbout={updateAbout} />
-      )}
-      </div>
-
-      </div>
-
-
-    
+      <SeoTagger
+        title="Edit Your Candidate Profile | Industry Connect"
+        description="Update and refine your candidate profile on Industry Connect to
+ensure it reflects your latest skills and experiences"
+      />
+    </>
   );
 };
 

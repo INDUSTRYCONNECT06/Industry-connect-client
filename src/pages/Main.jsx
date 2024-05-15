@@ -8,6 +8,7 @@ import heroImg from "../assets/images/heroimg.png";
 import { useNavigate } from "react-router-dom";
 import loaderGIF from "../assets/images/loader.gif";
 import mixpanel from "mixpanel-browser"
+import SeoTagger from "../components/SeoTagger";
 
 const dataObj = [
   {
@@ -136,6 +137,10 @@ const Main = () => {
           </section>
         </div>
       </div>
+
+
+      <SeoTagger title="Find Your Dream Job | INDUSTRY CONNECT" description="Your go-to platform for hassle-free job connections and finding the right
+talent Connect with top companies and talent effortlessly and discover your perfect job match"/>
     </>
   );
 };

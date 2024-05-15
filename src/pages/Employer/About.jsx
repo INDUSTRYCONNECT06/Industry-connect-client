@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { employerContext } from "../../Context/EmployerState";
 import { citiesData } from "../../assets/data/sample";
+import mixpanel from "mixpanel-browser";
 
 const About = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const About = () => {
 
   // submitting the form
   const handleSubmit = async (e) => {
+    mixpanel.track("Submitting about form")
     e?.preventDefault();
 
     let json = await updateAbout(data);
@@ -148,6 +150,7 @@ const About = () => {
                           onClick={() => {
                             setData({ ...data, location: e });
                             setCloseModal(false);
+                            mixpanel.track("selected location",{location:e})
                           }}
                         >
                           {e}

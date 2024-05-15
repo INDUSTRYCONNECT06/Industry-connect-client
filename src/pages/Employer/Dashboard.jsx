@@ -6,6 +6,7 @@ import PostedJobs from "./Dashboard Pages/PostedJobs";
 import Applicants from "./Dashboard Pages/Applicants";
 import { loginContext } from "../../Context/LoginState";
 import CompanyDetails from "../../components/CompanyDetails";
+import mixpanel from "mixpanel-browser";
 
 const Dashboard = () => {
 
@@ -58,10 +59,10 @@ const Dashboard = () => {
 
 
           <section className="w-[100%] mt-10 flex flex-col gap-4 items-center text-center text-[15px]">
-            <div className=" w-full py-2 bg-[#D9D9D959] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{navigate("/employer/dashboard")}}>Posted Jobs</div>
-            <div className=" w-full py-2 bg-[#f0f0f064] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{navigate("/employer/postjob")}}>Post Job</div>
-            <div className=" w-full py-2 bg-[#f0f0f064] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{navigate("/employer/about")}}>Edit Profile</div>
-            <div className=" w-full py-2 bg-[#f0f0f064] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{navigate("/")}}>Search Employees</div>
+            <div className=" w-full py-2 bg-[#D9D9D959] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{mixpanel.track("Clicked Posted Jobs"); navigate("/employer/dashboard")}}>Posted Jobs</div>
+            <div className=" w-full py-2 bg-[#f0f0f064] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{mixpanel.track("Clicked Post Job"); navigate("/employer/postjob")}}>Post Job</div>
+            <div className=" w-full py-2 bg-[#f0f0f064] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{mixpanel.track("Clicked Edit Profile"); navigate("/employer/about")}}>Edit Profile</div>
+            <div className=" w-full py-2 bg-[#f0f0f064] hover:bg-[#D9D9D959] cursor-pointer rounded-sm" onClick={()=>{mixpanel.track("Clicked Search Employees"); navigate("/")}}>Search Employees</div>
           </section>
         </div>
 
