@@ -1,0 +1,8 @@
+# robots.txt for IndustryConnect Vite App
+
+# Allow all crawlers access to all content
+User-agent: *
+Allow: /
+
+# Specify the location of the sitemap
+Sitemap: https://www.industryconnect.co.in/sitemap.xml
