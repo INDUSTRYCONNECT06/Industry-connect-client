@@ -52,6 +52,14 @@ export const JobCard = ({
     }
   };
 
+  function isValidEmail(email) {
+    // Define a regular expression for validating an email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    // Test the email against the regular expression
+    return emailPattern.test(email);
+}
+
   const handleSubmit = async () => {
     mixpanel.track(jobApplied ? "Applied Button Clicked" : "Aplly job clicked",{
       jobId: jobData?._id
@@ -82,6 +90,13 @@ export const JobCard = ({
         }
       }
     }
+
+    if(localStorage.getItem("jwtToken")) {
+      if(!isValidEmail(jobData?.applyAt)){
+        window.open(jobData?.applyAt)
+      }
+    }
+
   };
 
   return (
