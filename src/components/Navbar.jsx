@@ -71,6 +71,14 @@ const Navbar = () => {
               Dashboard
             </Link>}
 
+
+            <span
+              onClick={()=>{mixpanel.track("Help & Support Clicked on Navbar");window.open(`https://wa.me/${919650082864}`)}}
+              className="text-[10px] md:text-sm font-medium text-main-blue-01 cursor-pointer hover:scale-105 mt-2 transition-transform"
+            >
+              Help & Support
+            </span>
+
             <img
               src={
                 loginUserInfo?.profile
@@ -142,6 +150,13 @@ const Navbar = () => {
                 onClick={()=>{window.open("https://www.linkedin.com/in/industry-connect-4a6119300")}}
               >
                 Connect With Us
+              </span>
+
+              <span
+                className="cursor-pointer hover:text-main-blue-01 hover:font-semibold"
+                onClick={()=>{window.open("https://docs.google.com/forms/d/e/1FAIpQLScn2xEQCijxmQrCN4U3MuDru6cUec7TJNYP7OI5OzGR_d6Hpg/viewform?usp=sf_link");mixpanel.track("Feedback clicked")}}
+              >
+                Feedback
               </span>
 
               <span

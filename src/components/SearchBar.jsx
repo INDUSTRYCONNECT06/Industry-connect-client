@@ -9,7 +9,7 @@ const SearchBar = ({position,location}) => {
 
   const navigate = useNavigate()
 
-  const [data, setData] = useState({ position: null, location: null });
+  const [data, setData] = useState({ position: "", location: "" });
   const [CloseModal, setCloseModal] = useState({
     position: true,
     location: true,
@@ -70,7 +70,6 @@ const SearchBar = ({position,location}) => {
             type="text"
             placeholder="What position are you looking for ?"
             className="w-full focus:outline-none"
-            required
             name="position"
             value={data?.position}
             onChange={handleChange}

@@ -340,6 +340,7 @@ const SearchJobs = () => {
                       type="radio"
                       name="employment"
                       id="Full Time"
+                      checked={filterData?.employment === "Full Time"}
                       onChange={handleChange}
                     />
                     <label htmlFor="Full Time">Full Time</label>
@@ -350,6 +351,7 @@ const SearchJobs = () => {
                       type="radio"
                       name="employment"
                       id="Part Time"
+                      checked={filterData?.employment === "Part Time"}
                       onChange={handleChange}
                     />
                     <label htmlFor="Part Time">Part Time</label>
@@ -360,6 +362,7 @@ const SearchJobs = () => {
                       type="radio"
                       name="employment"
                       id="Internship"
+                      checked={filterData?.employment === "Internship"}
                       onChange={handleChange}
                     />
                     <label htmlFor="Internship">Internship</label>
@@ -367,7 +370,7 @@ const SearchJobs = () => {
                 </div>
               </section>
 
-              <section className="flex flex-col gap-4">
+              {/* <section className="flex flex-col gap-4">
                 <h3 className="text-[16px] font-medium">Salary (per year)</h3>
 
                 <div className="pl-1 flex flex-col gap-2">
@@ -375,30 +378,33 @@ const SearchJobs = () => {
                     <input
                       type="radio"
                       name="salary"
-                      id="30000k"
+                      id="30000"
+                      checked={filterData?.employment === "30000"}
                       onChange={handleChange}
                     />
-                    <label htmlFor="30000k"> &gt; 30000k </label>
+                    <label htmlFor="30000"> &gt; 30000 </label>
                   </div>
 
                   <div className="flex gap-2 text-sm">
                     <input
                       type="radio"
                       name="salary"
-                      id="60000k"
+                      id="60000"
+                      checked={filterData?.salary === "60000"}
                       onChange={handleChange}
                     />
-                    <label htmlFor="60000k"> &gt; 60000k </label>
+                    <label htmlFor="60000"> &gt; 60000 </label>
                   </div>
 
                   <div className="flex gap-2 text-sm">
                     <input
                       type="radio"
                       name="salary"
-                      id="90000k"
+                      id="90000"
+                      checked={filterData?.salary === "90000"}
                       onChange={handleChange}
                     />
-                    <label htmlFor="90000k"> &gt; 90000k </label>
+                    <label htmlFor="90000"> &gt; 90000 </label>
                   </div>
 
                   <div className="flex gap-2 text-sm">
@@ -408,10 +414,10 @@ const SearchJobs = () => {
                       id="130000k"
                       onChange={handleChange}
                     />
-                    <label htmlFor="130000k"> &gt; 130000k </label>
+                    <label htmlFor="130000k"> &gt; 130000 </label>
                   </div>
                 </div>
-              </section>
+              </section> */}
 
               {/* <section className="flex flex-col gap-4">
               <h3 className="text-[16px] font-medium">
