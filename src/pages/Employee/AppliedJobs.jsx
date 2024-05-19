@@ -38,9 +38,8 @@ const AppliedJobs = () => {
                 jobsData?.data?.map((element) => {
                   return (
                     <JobCard
-                      jobData={element?.jobId}
-                      orgData={element?.jobId?.employerId}
                       key={element?._id}
+                      {...element?.jobId}
                       appliedButton={false}
                       bookmarkedButton={false}
                       appliedAt={element?.createdAt}
