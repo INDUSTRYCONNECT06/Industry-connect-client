@@ -31,7 +31,6 @@ const EmployerState = (props) => {
       window.open("/employer/about", "_self");
     } else {
       toast.error("Some error occured in logging, Please Try Again!!!");
-      window.open("/login", "_self");
     }
   };
 

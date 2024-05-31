@@ -43,6 +43,7 @@ function Check() {
         navigate("/");
       }
     };
+    
   }, []);
 
   return (

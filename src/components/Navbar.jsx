@@ -66,7 +66,7 @@ const Navbar = () => {
             {localStorage.getItem("userType") === "employer" && window.location.pathname !== "/employer/dashboard" && <Link
               to="/employer/dashboard"
               onClick={()=>{mixpanel.track("Dashboard Clicked on Navbar")}}
-              className="text-sm md:text-xl font-medium text-main-blue-01 cursor-pointer hover:scale-105 transition-transform"
+              className="text-[10px] md:text-sm font-medium text-main-blue-01 cursor-pointer hover:scale-105 mt-2 transition-transform"
             >
               Dashboard
             </Link>}
