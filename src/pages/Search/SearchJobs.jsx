@@ -107,7 +107,7 @@ export const JobCard = ({
     }
 
     if (localStorage.getItem("jwtToken")) {
-      if (!isValidEmail(applyAt)) {
+      if (!isValidEmail(applyAt) && applyAt) {
         window.open(applyAt);
       }
     }

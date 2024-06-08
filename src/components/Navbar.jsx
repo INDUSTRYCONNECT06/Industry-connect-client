@@ -131,14 +131,14 @@ const Navbar = () => {
 
               {localStorage.getItem("userType") === "employer" && (
                 <Link to="/employer/postjob" onClick={()=>{mixpanel.track("Post Job Clicked on Navbar Options")}}>
-                  <span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
+                  <span className="cursor-pointer hover:text-main-blue-01 hover:scale-105 transition-transform">
                     Post a job
                   </span>
                 </Link>
               )}
 
 {localStorage.getItem("userType") === "employee" && <Link to="/employee/saved" onClick={()=>{mixpanel.track("Saved jobs Clicked on Navbar Options")}}>
-              <span className="cursor-pointer hover:text-main-blue-01 hover:font-semibold">
+              <span className="cursor-pointer hover:text-main-blue-01 hover:scale-105 transition-transform">
                 Saved List
               </span></Link>}
 
@@ -146,21 +146,21 @@ const Navbar = () => {
                 Applied Jobs
               </span></Link> }
               <span
-                className="cursor-pointer hover:text-main-blue-01 hover:font-semibold"
+                className="cursor-pointer hover:text-main-blue-01 hover:scale-105 transition-transform"
                 onClick={()=>{window.open("https://www.linkedin.com/in/industry-connect-4a6119300")}}
               >
                 Connect With Us
               </span>
 
               <span
-                className="cursor-pointer hover:text-main-blue-01 hover:font-semibold"
+                className="cursor-pointer hover:text-main-blue-01 hover:scale-105 transition-transform"
                 onClick={()=>{window.open("https://docs.google.com/forms/d/e/1FAIpQLScn2xEQCijxmQrCN4U3MuDru6cUec7TJNYP7OI5OzGR_d6Hpg/viewform?usp=sf_link");mixpanel.track("Feedback clicked")}}
               >
                 Feedback
               </span>
 
               <span
-                className="cursor-pointer hover:text-main-blue-01 hover:font-semibold"
+                className="cursor-pointer hover:text-main-blue-01 hover:scale-105 transition-transform"
                 onClick={()=>{handleLogout();mixpanel.track("Logout Clicked on Navbar Options")}}
               >
                 Logout

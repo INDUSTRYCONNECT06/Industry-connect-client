@@ -19,7 +19,7 @@ function Check() {
       //  login in the employer and controliing the navigation
       if (loginInfo?.success) {
         if (localStorage.getItem("userType") === "employer") {
-          await loginEmployer(loginInfo?.res);
+          await loginEmployer({...loginInfo?.res,"loginUsing":"google"});
         } else if (localStorage.getItem("userType") === "employee") {
           await loginEmployee(loginInfo?.res);
         }

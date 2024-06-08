@@ -30,7 +30,7 @@ const EmployerState = (props) => {
       localStorage.setItem("jwtToken", result?.jwtToken);
       window.open("/employer/about", "_self");
     } else {
-      toast.error("Some error occured in logging, Please Try Again!!!");
+      toast.error(result?.error ?? "Some error occured in logging, Please Try Again!!!");
     }
   };
 
